@@ -33,6 +33,7 @@ umd_fees_pct <- umd_fees |> mutate(pct_change = (`Fall 2026`- `Fall 2021`)/`Fall
 
 Write a few sentences about what you found in those percentages. What's the story here? What questions do you have?
 
+The most significant percent change is under student sustainability with a 150% change. The second category with the biggest percent change was for the shuttle buses with a 58.30% change. I think that the most relevant topic to write about would be the shuttle buses because the school made a switch to electric buses, which could fall under either the student sustainability or shuttle bus category because it involves sustainability initiatives. I would question how the electric buses may have reshaped the fees and how much of the project was covered by grants and how much of the costs students absorbed. 
 
 
 
