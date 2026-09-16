@@ -8,7 +8,7 @@ Follow along with the demo to learn how to calculate crime rates using R and the
 
 ```{r}
 library(tidyverse)
-install.packages("janitor")
+#install.packages("janitor")
 library(janitor)
 ```
 
@@ -47,7 +47,7 @@ crimes_with_rates <- crimes |> mutate(violent_rate = violent_crime_total/populat
 ### Task 6: Describe our results
 
 Write a few sentences about what you found in the data. What years had the highest crime rates? What years had the lowest crime rates? Does the pattern match your expectations? What might explain some of the results you found?
-
+The year 2020 is the year with the lowest crime rate due to the COVID-19 pandemic. The 1980s-1990s are the years with the highest crime rates. This pattern matches my expextations because during the COVID-19 pandemic, everyone was stuck inside of their homes, so the sharp decrease in crime is to be expected. 
 
 
 
