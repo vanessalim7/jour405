@@ -73,3 +73,21 @@ The change comes as Baltimore's crime rates fell sharply from 2019 to 2020, whil
 ### Task 9: Save Your Work and Put it on GitHub
 
 Save this notebook, then commit it to your local repository. Push the changes to your GitHub repository and submit the URL for this file in ELMS.
+
+### Task 10: 
+### 10a: Using the 2020 violent crime rate, calculate the percentiles using `ntile()`. Save the results to a new dataframe called `md_cities_percentiles`. How many cities are above the 90th percentile?
+```{r}
+md_cities_percentiles <- md_cities_rates |> mutate(percentile=ntile(violent_rate_2020,100))
+```
+### 10b: Calculate the Interquartile Range of the 2020 violent crime rate using `summarize()` 
+```{r}
+md_cities_percentiles |> summarise(cities_above_90th=sum(percentile>90))
+```
+### 10c:R's `IQR()` function. The syntax is similar to how `mean()` works.
+```{r}
+md_cities_rates |> summarise(IQR_violent_crime_2020= IQR(violent_rate_2020))
+```
+### 10d: Do the results change your best story idea from the previous assignment? Why or why not?
+These results do not change my previous story idea. The 2020 violent crime rates show that there are 10 cities falling above the 90th percentile. The IQR of 4.198895 also shows that the middle 50% of cities had a relatively small range of violent crime rats, so I would still want to focus on cities with especially high crime rates compared to the rest of the state. 
+
+
