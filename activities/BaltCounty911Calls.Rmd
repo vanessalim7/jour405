@@ -1,6 +1,6 @@
 ---
 title: "Baltimore County 911 Overdose Calls Analysis"
-author: "YOUR NAME HERE"
+author: "Vanessa Lim"
 ---
 
 ```{r setup, include=FALSE}
@@ -75,6 +75,7 @@ summary(daily_calls$call_count)
 Let's visualize the time series of daily calls. What patterns do you see? If you had to draw horizontal lines that would highlight unusual days, where would those lines be?
 
 ANSWER HERE
+There was a very big spike in October and if I were to draw horizontal lines to highlight unusual data I would make a horizontal line at 5 calls and 17 calls since a majority of the data falls within 5-17 and anything lower and higher would be considered an outlier.
 
 ```{r daily-calls-plot}
 # Plot daily call volume
@@ -138,6 +139,7 @@ unusual_days |>
 Let's visualize these unusual days in the context of the full dataset. How do they differ from your answer on Task 3?
 
 ANSWER HERE
+When looking at unusual days, this is relatively the same as my answer on task 3. I put lines at 17 calls and 5 calls and considered anything higher or lower than the 5-17 range an outlier. This aligns well with the days categorized as unusually high and unusually low. 
 
 ```{r plot-unusual-days}
 # Create a clean factor for the plot legend
@@ -208,6 +210,7 @@ ggplot(dow_summary, aes(x = day_of_week, y = avg_calls)) +
 We can also calculate z-scores that account for the day of the week pattern. How would you describe the day with the highest z-score without using the term "z-score"?
 
 ANSWER HERE
+When examining the compared average number of calls for each day of the week, Saturday has the highest number of average calls. 
 
 ```{r day-of-week-z-scores}
 # Calculate day-of-week adjusted z-scores
@@ -299,4 +302,5 @@ top_outliers |> kable(digits = 2)
 Based on our z-score analysis, what are some potential angles for reporting? What would your next steps be and what would you tell an editor about your findings?
 
 ANSWER HERE
+
 
