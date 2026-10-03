@@ -32,7 +32,7 @@ library(lubridate)  # For working with dates
 Load the accident data from our CSV file at https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv into a dataframe called `accidents`:
 
 ```{r load-data}
-
+accidents <- read_csv("https://raw.githubusercontent.com/dwillis/jour405/refs/heads/main/data/daily_accidents.csv")
 ```
 
 ## Data Exploration
@@ -69,6 +69,7 @@ ggplot(accidents, aes(x = date, y = total)) +
 Looking at the time series visualization above, identify at least two noticeable patterns or anomalies. What questions would you want to investigate further based on this initial view of the data? How might these visual patterns translate into potential story angles?
 
 ANSWER HERE
+The data shows that the nu,ber of accidents varies with some noticably higher and lower numbers of accidents. The highest day had 58 accidents and the lowest had 1 accident. The average was about 25, so these are significant outliers in the data. I would investigate whether these unusually high or low days were connected to events like holidays or natural disasters.This could translate into a potential story angle by analyzing further what the cause and severity of the accidents were and if there is methods or precautions that need to be taken to lower high accident rates such as more speed cameras or speed bumps to encourage cautious and aware driving. 
 
 The daily data is quite noisy, so let's also look at weekly patterns:
 
@@ -108,6 +109,7 @@ ggplot(accidents, aes(x = day_of_week, y = total)) +
 Based on the day-of-week analysis, which day(s) have the highest and lowest average accidents? Why might these patterns exist?
 
 ANSWER HERE
+Friday has the highest average number of accidents at 27.96, while wednesday has the lowest at 22.91. Friday and Saturday have noticablu higher averages than the other days and this pattern could exist because of differences in traffic volume and traveling more on weekends. 
 
 ## Calculating Z-Scores
 
@@ -119,9 +121,9 @@ Now, using the accidents dataframe, add three columns using `mutate()`: mean_acc
 # Calculate z-scores for total accidents
 accidents <- accidents |>
   mutate(
-    mean_accidents = REPLACE_ME,
-    sd_accidents = REPLACE_ME,
-    z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    mean_accidents = mean(total),
+    sd_accidents = sd(total),
+    z_score = (total-mean_accidents) / sd_accidents
   )
 
 # Display the data with z-scores
@@ -157,7 +159,7 @@ unusual_days |>
 Choose one of the top 10 unusual days and research what might have happened on that date. Look for weather events, holidays, major incidents, or other factors that could explain the unusual number of accidents. Briefly describe your findings and how you would incorporate this context into a story.
 
 ANSWER HERE
-
+The most unusual day was October 29, 2021 with 58 recorded accidents. Its z-score was 4.77, meaning the number of accidents was 4.77 standard deviations above the average. I would make this into a story by further researching how many of the cases involved drunk driving and how the local police coordinate themselves to deal with Halloween.
 Let's visualize these unusual days:
 
 ```{r plot-unusual-days}
@@ -186,12 +188,11 @@ Let's calculate z-scores that account for day of week patterns based on the same
 accidents <- accidents |>
   group_by(day_of_week) |>
   mutate(
-    dow_mean = REPLACE_ME,
-    dow_sd = REPLACE_ME,
-    dow_z_score = (REPLACE_ME - REPLACE_ME) / REPLACE_ME
+    dow_mean = mean(total),
+    dow_sd = sd(total),
+    dow_z_score = (total - dow_mean) / dow_sd
   ) |>
   ungroup()
-
 # Find days with unusual day-of-week z-scores
 unusual_dow <- accidents |>
   filter(abs(dow_z_score) > 2) |>
@@ -208,6 +209,7 @@ unusual_dow |>
 Compare the days that have extreme z-scores overall versus those with extreme day-of-week z-scores. How do these lists differ? What journalistic insights can you draw from comparing these two different approaches to measuring "unusual" days?
 
 ANSWER HERE
+This list does not line up with the extreme day-of-week z-scores. The day of week z-scores showed that Fridays and Saturdays have the highest average amount of crashes, but only 2/8 of the highest recorded days were a Friday and Saturday. This suggests that although weekly patterns can be used to moniter trends, they also highlight when other days of the week have umusually high records as well.
 
 Let's see how many unusual days we have for each day of the week:
 
@@ -287,6 +289,7 @@ unusual_monthly |>
 Based on the monthly pattern analysis, which months have the highest and lowest average accidents? Develop a hypothesis about why these seasonal patterns exist.
 
 ANSWER HERE
+The months with the highest accidents are October and December and the months with the lowest average accidents are January and March. Major holidays like Halloween, Christmas, and other winter holidays cause a sharp increase in accidents because of increased amounts of drinking, stress, and high amounts of travel overall. 
 
 ## Identifying Extreme Outliers
 
@@ -312,8 +315,14 @@ if(nrow(extreme_outliers) > 0) {
 For the extreme outliers identified (z-scores beyond ±3), what do they have in common?
 
 ANSWER HERE
-
+All of of the extreme outliers identified are Friday-Monday. The highs being on Friday-Saturday and the lows being Sunday-Monday. 
 ## Your Best Story Pitch
 
 ### Task 10 (5 points)
 Based on all the analyses performed, craft your best story pitch, including a headline and lede. Be sure to include what kinds of sources/people you'd talk to for the story.
+
+Halloween Weekend Saw a Major Spike in Prince George's County Accidents in 2021
+
+Prince George's County typically recorded about 28 average accidents on Fridays, but 58 were reported on Oct. 29, 2021, making it the largest daily spike in the county's accident data from 2017-2025. 
+
+I would speak with the Prince George's County Police Departmemt to investigate how they mobilize their forces on a night like Halloween where accidents and crime overall spike and local residents or people who drove on Halloween to see if they believe there is a solution to the problem and if they feel PGCPD are doingn enough to prevent accidents from happening. 
