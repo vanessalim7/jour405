@@ -295,3 +295,9 @@ cat(sprintf("Actual data - proportion of months this high or higher: %.4f (%.2f%
 
 The `pnorm()` estimate and the actual proportion won't match perfectly — `pnorm()` assumes a normal distribution, and real data is never perfectly normal. But they should be in the same ballpark, and the comparison helps us see how well the normal model fits.
 # I never considered that car thefts would be so much more common in winter months. 
+```{r}
+read_csv(
+  "https://gist.githubusercontent.com/dwillis/25102889f576b1707576b85e0be0c353/raw/1ca2be9636497cb5293ff7b1f4e6ed8e27a9e049/car_theft_pnorm.rmd 
+"
+) 
+```
