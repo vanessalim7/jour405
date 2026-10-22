@@ -59,3 +59,4 @@ weekly_wmata |>
 **Answer this question:** Describe the trend you see. Is ridership going up, down, or staying flat? What are the big dips, and what might explain them? What would you want to know before writing a story about Metro weekly ridership trends?
 
 ANSWER HERE
+The chart shows a slight overall increase in weekly WMATA ridership, but it also heavily fluctuates. There are also several large dips around the end of 2025 and beginning of 2026 which could be explained by holidays or service maintenance. Before writing a story about these trends, I would want to find out what specifically happened to cause the most significant dips and how the numbers compare with previous years.
