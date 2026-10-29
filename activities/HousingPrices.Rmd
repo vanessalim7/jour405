@@ -49,8 +49,8 @@ Replace the REPLACE_ME values to calculate the mean, standard deviation and coun
 ```{r}
 new_stats <- home_data |> 
   summarise(
-    mean = mean(REPLACE_ME),
-    sd = sd(REPLACE_ME),
+    mean = mean(sale_price),
+    sd = sd(sale_price),
     n = n()
   )
 
@@ -60,6 +60,7 @@ new_stats
 **Answer this question:** How does the new average compare to the prior average of $285,000? How much higher is it in dollar terms? Does that seem like a big difference to you? What else would you want to know?
 
 ANSWER HERE
+The new average home price is 304500, which is 19500 higher than the prior average of 285000. This seems like a substantial difference and I would want to know whether the increase is statistically significant and whether outside factors such as changes in the housing market could explain it. 
 
 ### Task 3: Visualize the distribution (1 point)
 
@@ -98,6 +99,8 @@ ggplot(home_data, aes(x = sale_price)) +
 **Answer this question:** Look at where the old average (red dashed line) falls relative to the new sales. How many of the 14 homes sold for more than the old average? What does the histogram tell you about the spread of the new prices?
 
 ANSWER HERE
+All 14 homes sold for more than the preious average of 285,000. The new prices range from 288000-325000. The histogram suggests that prices are generally higher than before, although we need statistical testing to determine whether the difference is significant.
+
 
 ### Task 4: Set up and perform a hypothesis test (2 points)
 
@@ -110,13 +113,13 @@ This is where we formally test the officials' claim. Fill in the REPLACE_ME valu
 
 ```{r}
 # Set the significance level
-alpha <- REPLACE_ME
+alpha <- 0.05
 
 # Perform a one-sample t-test
 # Since we want to know if home values INCREASED, we use alternative = "greater"
 t_test_result <- t.test(
   home_data$sale_price,
-  mu = REPLACE_ME,
+  mu = 285000,
   alternative = "greater"
 )
 
@@ -126,6 +129,7 @@ t_test_result
 **Answer this question:** Look at the p-value. Is it less than our alpha of 0.05? What does this mean for our null hypothesis — can we reject it? What can we now say about the officials' claim?
 
 ANSWER HERE
+The p-value is less than the significance level of 0.05. We can reject the null hypothesis because there is strong statistical evidence that the average home price is higher than 285,000, but this test does not prove that the transit line caused the increase.
 
 ### Task 5: Interpret the results with a confidence interval (2 points)
 
@@ -156,6 +160,7 @@ story_stats
 **Answer this question:** The 95% confidence interval tells us the range where the true average home price likely falls. Does that range include the old average of $285,000? What does that tell you?
 
 ANSWER HERE
+The 95% confidence interval ranges from approximately 297,624 to 311,376. This range does not include the previous average of 285,000, which supports the conclusion that the current average home price is higher than the previous average.
 
 ### Task 6: Calculate the effect size (3 points)
 
@@ -166,7 +171,7 @@ We've established that the increase is statistically significant — it's real, 
 Replace the REPLACE_ME values.
 
 ```{r}
-effect_size <- (mean(new_prices) - REPLACE_ME) / REPLACE_ME
+effect_size <- (mean(new_prices) - prior_mean) / prior_sd
 
 effect_size_label <- case_when(
   abs(effect_size) < 0.2 ~ "Negligible",
@@ -194,10 +199,14 @@ You now have all the statistical evidence. But writing the story requires more t
 **Part A:** The local officials are going to claim the transit line increased home values. Based on your analysis, is that claim supported? Write 2-3 sentences for the top of your story that accurately reflect both the statistical significance AND the effect size. Don't just echo the officials' talking points — interrogate them.
 
 ANSWER HERE
+The 19,500 increase seems fairly substantial in dollar terms, but more modest compared with the 32,000 standard deviation of home prices before the transit line opened. Cohen’s d is about 0.61, which indicates a medium effect size. This helps put the increase in context by showing how large it is relative to the existing variation in home prices instead of looking at the dollar amount alone.
 
 **Part B:** A $19,500 increase is real and statistically significant, but what *else* could explain rising home prices in this neighborhood? List at least two alternative explanations that a good reporter would want to investigate before attributing the increase entirely to the transit line.
 
 ANSWER HERE
+1. Housing market trends overall and if home prices have increased throughout the region because of higher demand
+2. If there has been renovations or development throughout the neighborhood such as new businesses or amenities 
+3. If recent sales include newer or more renovated homes than those sold before the transit line opened. 
 
 
 When you are finished, save your work, switch to GitHub Desktop, then add, commit and push your changes to GitHub and submit the URL of the notebook in ELMS.
