@@ -1,0 +1,86 @@
+---
+title: "JOUR405 Final Project"
+output: html_document
+date: "2026-11-10"
+Name: "Vanessa Lim"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Research Question 
+
+Does Maryland football attendance at regular-season home games vary depending on the outcome of the team's previous game?
+
+#Hypothesis
+#Hypothesis 1: 
+Maryland home games following a win will have higher attendance on average than home games following a loss.
+#Hypothesis 2: 
+The relationship between Maryland's previous game result and attendance at its next home game will vary depending on the number of days between games.
+#Data and Sources Links
+
+My primary source is the cfbfastR-data GitHub repository, which contains annual CSV files with individual college football game records.(https://github.com/sportsdataverse/cfbfastR-data)
+
+CSV files: https://github.com/sportsdataverse/cfbfastR-data/tree/main/schedules/csv
+
+I plan to use the files from 2011 through 2025. They contain information such as game dates, teams, scores and attendance.
+
+I will also use the CollegeFootballData API documentation to get data that is Maryland specific (when I can figure out how to use API because that is what the site uses to retrieve data, but we haven't gone over that and I couldn't figure it out, so I'm just putting it aside for now and will try to figure it out later):
+
+https://api.collegefootballdata.com/api/docs/
+
+For an extra level to check that data, I plan to check it with the Maryland Football Record Book:
+
+https://s3.us-east-2.amazonaws.com/sidearm.nextgen.sites/umterps.com/documents/2026/3/10/Football_Record_Book_Thru_2025_021126_Final.pdf?utm_source=chatgpt.com 
+# Loading the Data
+
+I will use read_csv() to import the annual CSV files directly from GitHub.
+
+
+
+```{r}
+library(tidyverse)
+
+games_2011 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2011.csv")
+
+games_2012 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2012.csv")
+
+games_2013 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2013.csv")
+
+games_2014 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2014.csv")
+
+games_2015 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2015.csv")
+
+games_2016 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2016.csv")
+
+games_2017 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2017.csv")
+
+games_2018 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2018.csv")
+
+games_2019 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2019.csv")
+
+games_2020 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2020.csv")
+
+games_2021 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2021.csv")
+
+games_2022 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2022.csv")
+
+games_2023 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2023.csv")
+
+games_2024 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2024.csv")
+
+games_2025 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfastR-data/main/schedules/csv/cfb_schedules_2025.csv")
+
+
+```
+```{r}
+
+summary(games_2011)
+
+```
+
+
+#Analysis: 
+#Contains and time period- 
+The data I loaded contains data for college football games each year from 2011-2025, but it is all college football and not just UMD football. I looked specifically into the game data from 2011, and the information found in the csv files I loaded is useful, but again, covers all of college football and not just UMD football, so it would be most useful if I could filter out the Maryland data so it can be analyzed to answer my research question.  The second webiste I mentioned (https://api.collegefootballdata.com/api/docs/) has the capability to show Maryland specific data, which would be crucial for carrying out this project, but I don't really understand how to use thw API format listed on the site. My biggest question is how to use the data from that site since it would be exactly the type of data needed to answer my research question. The site has instructions on how to load specific data from schools, but I still don't really understand how to use it. 
+
