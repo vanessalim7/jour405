@@ -8,6 +8,36 @@ Name: "Vanessa Lim"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+
+
+#Potential Analyses
+
+#1.Statistics
+
+I plan to calculate summary statistics for attendance, including the mean, median and standard deviation. I would calculate these separately for Maryland home games following a win and home games following a loss. I would also find the number of games in each group and comparing these statistics would give me an initial idea of whether attendance is higher following wins or losses. 
+
+#2.Charts
+
+I could create a bar chart comparing average attendance following wins and losses. This would provide a visual representation of the difference between the two groups.
+
+I could also create a scatterplot comparing the number of days between games with attendance at the next home game. This would help me see whether there is a strong/weak/or no relationship between the two variables. I could use these charts to identify patterns before looking more closely at the statistics.
+
+#3.Correlation
+
+Correlation could be useful for examining the relationship between the number of days between games and attendance. Since both are numerical variables, I could calculate a correlation coefficient to determine whether there is a positive or negative relationship. This could help me investigate my second hypothesis.
+
+I do not think correlation would be as useful for comparing wins and losses because the previous game result is categoricaland not numerical.
+
+
+# Questions/ things I might need clarification on 
+
+I need clarification on how to best compare attendance after wins and losses, especially if there are different numbers of games in each group. I am also unsure how to account for the number of days between games and whether comparing averages or calculating correlation would be the most useful approach for my second hypothesis.(Is the second hypothesis even worth including or should I stick to one and just scrap the other?)
+
+
+
+
+
 #Research Question 
 
 Does Maryland football attendance at regular-season home games vary depending on the outcome of the team's previous game?
