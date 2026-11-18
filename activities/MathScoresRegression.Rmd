@@ -33,7 +33,7 @@ schools |> arrange(`FARMS Pct`) |> head(10)
 Look at the distribution of FARMS percentages. Do any values look unusual or suspicious? What might it mean if a school has a FARMS percentage of exactly 100? Write two or three sentences describing what you see and whether anything concerns you.
 
 ANSWER HERE
-
+The mean being higher than the median suggests that there are a few schools that have especially high FARMS scores and are makging the average higher. The maximum value of 100% is a bit unusual and worth taking note of since it could raise the question of if schools are reporting accurate information about their FARMS scores. 
 
 ### Task 2: Create a Scatterplot and Describe the Results
 
@@ -51,6 +51,7 @@ schools |>
 Describe what you see. Is there a clear trend? Does the regression line look like it represents the data well, or does it seem to be pulled in an odd direction? Connect what you observed in Task 1 to what you see here.
 
 ANSWER HERE
+There is a very slight positive correlation seen on the regression line and it does not look like it represents the data well. It confirms my thoughts original thoughts that the 100% scores are pulling the average higher than it actually is. 
 
 
 ### Task 3: Run the Regression Model
@@ -69,7 +70,7 @@ The **p-value** tells you whether the relationship is statistically significant.
 Report all three values and describe what they tell you. Does this model support the school board member's claim? Is this even a model worth using?
 
 ANSWER HERE
-
+This model shows that the relationship between the FARMS percentahe and math scores is not statistically significant. The model does not seem like it is useful for what we are trying to measure. 
 
 ### Task 4: What's Driving the Problem? Filter and Rerun.
 
@@ -99,7 +100,7 @@ cat("  Adjusted R-squared:", summary(model_filtered)$adj.r.squared, "\n")
 How did removing those schools change the model? Did the coefficient change direction? Did the p-value or R-squared improve meaningfully? What does this tell you about the influence of suspicious data values on a regression model?
 
 ANSWER HERE
-
+Removing schools with 100% FARMS increased the coefficient from 0.1235 to 0.4040 and the relationship remained positive. The p-value decreased from 0.123 to 0.043. This shows how outlier data values can affect regression results and change whether a relationship appears statistically significant.
 
 ### Task 5: Even the Better Model Has Problems
 
@@ -133,6 +134,7 @@ head(schools_filtered |> select(1, `FARMS Pct`, `% Met or Exceeded Math Expectat
 What are the largest residuals? Given the model's weak R-squared, how much confidence would you have in labeling these schools as over- or under-performers? Why?
 
 ANSWER HERE
+The largest residuals show that some schools performed much higher or lower than the model predicted. I would have little confidence labeling schools as over or under performers because the model has a low R-squared and FARMS percentage explains very little of the variation in math scores.
 
 
 ### Task 6: Write the Story Pitch
@@ -142,3 +144,5 @@ You've now run two models, examined the data quality and seen that even a cleane
 Write a short story pitch (3-5 sentences) that addresses the following: Does the data support or contradict the claim? What data quality issues did you find? What would you need - different data, a different model, additional reporting - before you could responsibly publish a story about this claim? Who would you call first?
 
 ANSWER HERE
+
+The data does not support the school board member's claim because the regression showed a positive relationship between FARMS percentages and math scores. Some schools also reported 100% FARMS, which raised concerns about the accuracy of the data and if schools are correctly reporting their test scores. Before publishing a story, I would want to look at additional factors that could have affected the math scores and verify the unusual data values (the 100% scores). I would first contact the school board member to ask what evidence they used to support their claim.
