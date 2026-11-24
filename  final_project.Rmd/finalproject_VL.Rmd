@@ -103,12 +103,118 @@ games_2025 <- read_csv("https://raw.githubusercontent.com/sportsdataverse/cfbfas
 
 
 ```
+
+
+
+##Final Project: Trials, Errors and Lessons
+
+
+
 ```{r}
-
-summary(games_2011)
-
+games_all <- bind_rows(
+  games_2011,
+  games_2012,
+  games_2013,
+  games_2014,
+  games_2015,
+  games_2016,
+  games_2017,
+  games_2018,
+  games_2019,
+  games_2020,
+  games_2021,
+  games_2022,
+  games_2023,
+  games_2024,
+  games_2025
+)
 ```
 
+# Filtering for UMD games only
+
+```{r}
+maryland_games <- games_all |>
+  filter(home_team == "Maryland" | away_team == "Maryland")
+```
+
+```{r}
+maryland_games |> count(season)
+```
+
+# UMD game data
+
+```{r}
+maryland_games <- maryland_games |>
+mutate( maryland_points = ifelse(home_team == "Maryland", home_points, away_points),
+opponent_points = ifelse(home_team == "Maryland", away_points, home_points),
+maryland_home = home_team == "Maryland",
+maryland_win = maryland_points > opponent_points
+  )
+```
+
+# Previous game results 
+```{r}
+maryland_games <- maryland_games |>
+  filter(season_type == "regular") |>
+  arrange(season, start_date) |>
+  group_by(season) |>mutate(
+  previous_result = lag(maryland_win),
+  days_between_games = as.numeric(start_date - lag(start_date))
+  )
+```
+```{r}
+attendance_analysis <- maryland_games |>
+  filter(maryland_home == TRUE,
+  !is.na(previous_result),
+  !is.na(attendance),
+  attendance > 0
+  )
+```
+
+```{r}
+attendance_analysis |>
+  count(previous_result)
+```
+
+# I used `count()` to determine how many Maryland home games followed a win and how many followed a loss. This helped me see how many games were included in each group before comparing their attendance.
+
+# average attendance statistics
+```{r}
+attendance_analysis |>
+  group_by(previous_result) |>
+  summarise(
+    mean_attendance = mean(attendance),
+    sd_attendance = sd(attendance)
+  )
+```
+#I used `summarise()` to calculate the mean attendance and standard deviation for each group. The average attendance was slightly higher following a Maryland loss than following a win, which was the opposite of what I originally expected,but the difference between the two averages was relatively small. 
+
+# Attendance after wins and losses 
+
+```{r}
+attendance_analysis |>
+  group_by(previous_result) |>
+  summarise(mean_attendance = mean(attendance)) |>
+  ggplot(aes(x = previous_result, y = mean_attendance)) +
+  geom_col() +
+  scale_x_discrete(labels = c("FALSE" = "Loss", "TRUE" = "Win")) +
+  labs(title = "Average Maryland Football Attendance After Wins and Losses",
+    x = "Previous Game Result",
+    y = "Average Attendance"
+  )
+```
+# The bar graph makes the difference in average attendance easier to compare. It shows that attendance was slightly higher after a loss than after a win. Again, this does not support my original hypothesis that attendance would be higher following a win.
+
+# Attendance and time between gamms scatterplot 
+```{r}
+ggplot(attendance_analysis, aes(x = days_between_games, y = attendance)) +
+  geom_point() +
+  labs(title = "Maryland Football Attendance and Time Between Games",
+    x = "Days Between Games",
+    y = "Home Game Attendance"
+  )
+```
+# I also created a scatterplot to examine whether the number of days between Maryland games was related to attendance. Most of the games were approximately a week apart. The graph does not show an obvious relationship between the time between games and attendance.
 
 #Analysis: 
 #Contains and time period- 
