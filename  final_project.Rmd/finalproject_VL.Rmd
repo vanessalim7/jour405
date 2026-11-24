@@ -137,9 +137,6 @@ maryland_games <- games_all |>
   filter(home_team == "Maryland" | away_team == "Maryland")
 ```
 
-```{r}
-maryland_games |> count(season)
-```
 
 # UMD game data
 
