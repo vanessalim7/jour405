@@ -152,6 +152,8 @@ maryland_win = maryland_points > opponent_points
   )
 ```
 
+# I used `mutate()` to create new columns that identify Maryland's points, its opponent's points, whether Maryland played at home, and whether Maryland won the game. I used `ifelse()`(i had to google what code could be used to fix the problem) to make sure the correct scores were assigned to Maryland and its opponent, regardless of which team was listed as the home team. This allowed me to identify Maryland's game results consistently throughout the dataset.
+
 # Previous game results 
 ```{r}
 maryland_games <- maryland_games |>
@@ -197,8 +199,8 @@ attendance_analysis |>
   summarise(mean_attendance = mean(attendance)) |>
   ggplot(aes(x = previous_result, y = mean_attendance)) +
   geom_col() +
-  scale_x_discrete(labels = c("FALSE" = "Loss", "TRUE" = "Win")) +
-  labs(title = "Average Maryland Football Attendance After Wins and Losses",
+  labs(
+    title = "Average Maryland Football Attendance After Wins and Losses",
     x = "Previous Game Result",
     y = "Average Attendance"
   )
